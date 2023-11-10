@@ -1,0 +1,110 @@
+<div id="bannerRotativo" class="carousel">
+    <div class="slides">
+        <div class="slide"><img src="https://www.eliteaco.com.br/wp-content/uploads/2023/09/2023.09.08_banner_cupomSurpresa_1200x488.webp
+  "></div>
+        <div class="slide"><img
+                src="https://www.eliteaco.com.br/wp-content/uploads/2023/11/23.01.2023_banner01_blackFriday2023_1200x488-scaled.webp">
+        </div>
+        <div class="slide"><img
+                src="https://www.eliteaco.com.br/wp-content/uploads/2023/09/23.01.2023_banner_diversos_1200x488.webp">
+        </div>
+        <div class="slide"><img src="https://www.eliteaco.com.br/wp-content/uploads/2023/09/banner_ia.webp"></div>
+        <div class="slide"><img
+                src="https://www.eliteaco.com.br/wp-content/uploads/2023/09/banner_institucional_1200x488_07-2022.webp">
+        </div>
+        <!-- Adicione mais slides conforme necessário -->
+    </div>
+    <a class="prev" onclick="mudarSlide(-1)">❮</a>
+    <a class="next" onclick="mudarSlide(1)">❯</a>
+</div>
+
+<style>
+    .carousel {
+        position: relative;
+        max-width: 100%;
+        margin: auto;
+        overflow: hidden;
+    }
+
+    .slides .slide {
+        display: none;
+        width: 100%;
+    }
+
+    .slides img {
+        width: 100%;
+    }
+
+    .prev,
+    .next {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        width: auto;
+        margin-top: -22px;
+        padding: 16px;
+        color: white;
+        font-weight: bold;
+        font-size: 18px;
+        transition: 0.6s ease;
+        border-radius: 0 3px 3px 0;
+        /* Seus outros estilos */
+        -webkit-user-select: none;
+        /* Safari 3.1+ */
+        -moz-user-select: none;
+        /* Firefox 2+ */
+        -ms-user-select: none;
+        /* IE 10+ */
+        user-select: none;
+        /* Suporte padrão */
+    }
+
+    .prev {
+        left: 0;
+        border-radius: 3px 0 0 3px;
+    }
+
+    .next {
+        right: 0;
+        border-radius: 0 3px 3px 0;
+    }
+
+    .prev:hover,
+    .next:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+    }
+</style>
+
+<script>
+    let slideIndex = 0;
+    let slides = document.getElementsByClassName("slide");
+    let totalSlides = slides.length;
+    let slideInterval = setInterval(nextSlide, 3000); // Muda o slide a cada 3000ms (3 segundos)
+
+    function nextSlide() {
+        mudarSlide(1);
+    }
+
+    function mudarSlide(n) {
+        slideIndex = (slideIndex + n + totalSlides) % totalSlides;
+        for (let i = 0; i < totalSlides; i++) {
+            slides[i].style.display = "none";
+        }
+        slides[slideIndex].style.display = "block";
+    }
+
+    // Reinicia o intervalo quando o usuário muda o slide manualmente
+    function reiniciarIntervalo() {
+        clearInterval(slideInterval);
+        slideInterval = setInterval(nextSlide, 3000);
+    }
+
+    // Adiciona o reiniciarIntervalo às funções de navegação
+    document.querySelector('.prev').addEventListener('click', reiniciarIntervalo);
+    document.querySelector('.next').addEventListener('click', reiniciarIntervalo);
+
+</script>
+
+</body>
+
+</html>
