@@ -1,8 +1,11 @@
+<!-- Main Menu Elite Aço WebSite -->
+
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
 <title>Banner Rotativo</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 .carousel {
   position: relative;
@@ -14,6 +17,8 @@
 .slide {
   display: none;
   width: 100%;
+  opacity: 0; /* Initialize opacity to 0 */
+  transition: opacity 1s ease-in-out; /* Fade effect */
 }
 
 .slide img {
@@ -33,8 +38,8 @@
   font-size: 18px;
   transition: 0.6s ease;
   border-radius: 0 3px 3px 0;
+  -webkit-user-select: none; /* Safari */
   user-select: none;
-  -webkit-user-select: none; /* Suporte para Safari */
 }
 
 .prev {
@@ -56,7 +61,6 @@
 
 <div class="carousel">
   <div class="slide" style="display:block;"><img src="https://www.eliteaco.com.br/wp-content/uploads/2023/09/2023.09.08_banner_cupomSurpresa_1200x488.webp" alt="Cupom Surpresa"></div>
-  <div class="slide"><img src="https://www.eliteaco.com.br/wp-content/uploads/2023/11/23.01.2023_banner01_blackFriday2023_1200x488-scaled.webp" alt="Black Friday 2023"></div>
   <div class="slide"><img src="https://www.eliteaco.com.br/wp-content/uploads/2023/09/23.01.2023_banner_diversos_1200x488.webp" alt="Diversos"></div>
   <div class="slide"><img src="https://www.eliteaco.com.br/wp-content/uploads/2023/09/banner_ia.webp" alt="Inteligência Artificial"></div>
   <div class="slide"><img src="https://www.eliteaco.com.br/wp-content/uploads/2023/09/banner_institucional_1200x488_07-2022.webp" alt="Institucional"></div>
@@ -76,12 +80,20 @@ function nextSlide() {
 }
 
 function mudarSlide(n) {
-  slideIndex = (slideIndex + n + totalSlides) % totalSlides;
-  for (let i = 0; i < totalSlides; i++) {
+    slider[slideIndex].style.opacity = 0; // Fade out current slide
+    slideIndex = (slideIndex + n + totalSlides) % totalSlides;
+
+    for (let i = 0; i < totalSlides; i++) {
     slides[i].style.display = "none";
   }
+
   slides[slideIndex].style.display = "block";
+  setTimeout(function() {
+    slides[slideIndex].style.opacity = 1; // Fade in the new slide
+  }, 10); // Small timeout to ensure the display change has taken effect
+  
 }
+
 
 // Reinicia o intervalo quando o usuário muda o slide manualmente
 function reiniciarIntervalo() {
