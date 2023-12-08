@@ -2,110 +2,125 @@
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
-<meta charset="UTF-8">
-<title>Banner Rotativo</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-.carousel {
-  position: relative;
-  max-width: 100%;
-  margin: auto;
-  overflow: hidden;
-}
+    <meta charset="UTF-8">
+    <title>Banner Rotativo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .carousel {
+            position: relative;
+            max-width: 100%;
+            margin: auto;
+            overflow: hidden;
+        }
 
-.slide {
-  display: none;
-  width: 100%;
-  opacity: 0; /* Initialize opacity to 0 */
-  transition: opacity 1s ease-in-out; /* Fade effect */
-}
+        .slide {
+            display: none;
+            width: 100%;
+            opacity: 0;
+            /* Initialize opacity to 0 */
+            transition: opacity 1s ease-in-out;
+            /* Fade effect */
+        }
 
-.slide img {
-  width: 100%;
-  display: block;
-}
+        .slide img {
+            width: 100%;
+            display: block;
+        }
 
-.prev, .next {
-  cursor: pointer;
-  position: absolute;
-  top: 50%;
-  width: auto;
-  margin-top: -22px;
-  padding: 16px;
-  color: white;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
-  -webkit-user-select: none; /* Safari */
-  user-select: none;
-}
+        .prev,
+        .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            margin-top: -22px;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            -webkit-user-select: none;
+            /* Safari */
+            user-select: none;
+        }
 
-.prev {
-  left: 0;
-  border-radius: 3px 0 0 3px;
-}
+        .prev {
+            left: 0;
+            border-radius: 3px 0 0 3px;
+        }
 
-.next {
-  right: 0;
-  border-radius: 0 3px 3px 0;
-}
+        .next {
+            right: 0;
+            border-radius: 0 3px 3px 0;
+        }
 
-.prev:hover, .next:hover {
-  background-color: rgba(0,0,0,0.8);
-}
-</style>
+        .prev:hover,
+        .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+    </style>
 </head>
+
 <body>
 
-<div class="carousel">
-  <div class="slide" style="display:block;"><img src="https://www.eliteaco.com.br/wp-content/uploads/2023/09/2023.09.08_banner_cupomSurpresa_1200x488.webp" alt="Cupom Surpresa"></div>
-  <div class="slide"><img src="https://www.eliteaco.com.br/wp-content/uploads/2023/09/23.01.2023_banner_diversos_1200x488.webp" alt="Diversos"></div>
-  <div class="slide"><img src="https://www.eliteaco.com.br/wp-content/uploads/2023/09/banner_ia.webp" alt="Inteligência Artificial"></div>
-  <div class="slide"><img src="https://www.eliteaco.com.br/wp-content/uploads/2023/09/banner_institucional_1200x488_07-2022.webp" alt="Institucional"></div>
-  <!-- Adicione mais slides conforme necessário -->
-  <a class="prev" onclick="mudarSlide(-1)">&#10094;</a>
-  <a class="next" onclick="mudarSlide(1)">&#10095;</a>
-</div>
+    <div class="carousel">
+        <div class="slide" style="display:block;"><img
+                src="https://www.eliteaco.com.br/wp-content/uploads/2023/09/2023.09.08_banner_cupomSurpresa_1200x488.webp"
+                alt="Cupom Surpresa"></div>
+        <div class="slide"><img
+                src="https://www.eliteaco.com.br/wp-content/uploads/2023/09/23.01.2023_banner_diversos_1200x488.webp"
+                alt="Diversos"></div>
+        <div class="slide"><img src="https://www.eliteaco.com.br/wp-content/uploads/2023/09/banner_ia.webp"
+                alt="Inteligência Artificial"></div>
+        <div class="slide"><img
+                src="https://www.eliteaco.com.br/wp-content/uploads/2023/09/banner_institucional_1200x488_07-2022.webp"
+                alt="Institucional"></div>
+        <!-- Adicione mais slides conforme necessário -->
+        <a class="prev" onclick="mudarSlide(-1)">&#10094;</a>
+        <a class="next" onclick="mudarSlide(1)">&#10095;</a>
+    </div>
 
-<script>
-let slideIndex = 0;
-let slides = document.getElementsByClassName("slide");
-let totalSlides = slides.length;
-let slideInterval = setInterval(nextSlide, 3000); // Muda o slide a cada 3000ms (3 segundos)
+    <script>
+        let slideIndex = 0;
+        let slides = document.getElementsByClassName("slide");
+        let totalSlides = slides.length;
+        let slideInterval = setInterval(nextSlide, 3000); // Muda o slide a cada 3000ms (3 segundos)
 
-function nextSlide() {
-  mudarSlide(1);
-}
+        function nextSlide() {
+            mudarSlide(1);
+        }
 
-function mudarSlide(n) {
-    slider[slideIndex].style.opacity = 0; // Fade out current slide
-    slideIndex = (slideIndex + n + totalSlides) % totalSlides;
+        function mudarSlide(n) {
+            slider[slideIndex].style.opacity = 0; // Fade out current slide
+            slideIndex = (slideIndex + n + totalSlides) % totalSlides;
 
-    for (let i = 0; i < totalSlides; i++) {
-    slides[i].style.display = "none";
-  }
+            for (let i = 0; i < totalSlides; i++) {
+                slides[i].style.display = "none";
+            }
 
-  slides[slideIndex].style.display = "block";
-  setTimeout(function() {
-    slides[slideIndex].style.opacity = 1; // Fade in the new slide
-  }, 10); // Small timeout to ensure the display change has taken effect
-  
-}
+            slides[slideIndex].style.display = "block";
+            setTimeout(function () {
+                slides[slideIndex].style.opacity = 1; // Fade in the new slide
+            }, 10); // Small timeout to ensure the display change has taken effect
+
+        }
 
 
-// Reinicia o intervalo quando o usuário muda o slide manualmente
-function reiniciarIntervalo() {
-  clearInterval(slideInterval);
-  slideInterval = setInterval(nextSlide, 3000);
-}
+        // Reinicia o intervalo quando o usuário muda o slide manualmente
+        function reiniciarIntervalo() {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, 3000);
+        }
 
-// Adiciona o reiniciarIntervalo às funções de navegação
-document.querySelector('.prev').addEventListener('click', reiniciarIntervalo);
-document.querySelector('.next').addEventListener('click', reiniciarIntervalo);
+        // Adiciona o reiniciarIntervalo às funções de navegação
+        document.querySelector('.prev').addEventListener('click', reiniciarIntervalo);
+        document.querySelector('.next').addEventListener('click', reiniciarIntervalo);
 
-</script>
+    </script>
 
 </body>
+
 </html>
