@@ -61,8 +61,6 @@
         .next:hover {
             background-color: rgba(0, 0, 0, 0.8);
         }
-
-
     </style>
 </head>
 
@@ -92,7 +90,7 @@
             let slideIndex = 0;
             let slides = document.getElementsByClassName("slide");
             let totalSlides = slides.length;
-        
+
             // Initialize slides: hide all except the first one
             for (let i = 0; i < totalSlides; i++) {
                 slides[i].style.opacity = 0; // Ensure all slides are initially hidden
@@ -101,7 +99,7 @@
             setTimeout(function () {
                 slides[slideIndex].style.opacity = 1;
             }, 10); // Show the first slide
-        
+
             function nextSlide(n) {
                 slides[slideIndex].style.opacity = 0;
                 setTimeout(function () {
@@ -113,9 +111,9 @@
                     }, 10);
                 }, 600); // Delay for fade change
             }
-        
+
             let slideInterval = setInterval(function () { nextSlide(1) }, 3000); // Change slide every 3000ms
-        
+
             // Event listeners for manual slide change
             document.querySelector('.prev').addEventListener('click', function () {
                 nextSlide(-1);
