@@ -61,15 +61,18 @@
         .next:hover {
             background-color: rgba(0, 0, 0, 0.8);
         }
+
+
     </style>
 </head>
 
 <body>
 
     <div class="carousel">
-        <div class="slide" style="display:block;"><img
-                src="https://www.eliteaco.com.br/wp-content/uploads/2023/09/2023.09.08_banner_cupomSurpresa_1200x488.webp"
-                alt="Cupom Surpresa"></div>
+        <div class="slide">
+            <img src="https://www.eliteaco.com.br/wp-content/uploads/2023/09/2023.09.08_banner_cupomSurpresa_1200x488.webp"
+                alt="Cupom Surpresa">
+        </div>
         <div class="slide"><img
                 src="https://www.eliteaco.com.br/wp-content/uploads/2023/09/23.01.2023_banner_diversos_1200x488.webp"
                 alt="Diversos"></div>
@@ -83,42 +86,44 @@
         <a class="next" onclick="mudarSlide(1)">&#10095;</a>
     </div>
 
+
     <script>
-        let slideIndex = 0;
-        let slides = document.getElementsByClassName("slide");
-        let totalSlides = slides.length;
-        let slideInterval = setInterval(nextSlide, 3000); // Muda o slide a cada 3000ms (3 segundos)
-
-        function nextSlide() {
-            mudarSlide(1);
-        }
-
-        function mudarSlide(n) {
-            slider[slideIndex].style.opacity = 0; // Fade out current slide
-            slideIndex = (slideIndex + n + totalSlides) % totalSlides;
-
+        document.addEventListener("DOMContentLoaded", function () {
+            let slideIndex = 0;
+            let slides = document.getElementsByClassName("slide");
+            let totalSlides = slides.length;
+        
+            // Initialize slides: hide all except the first one
             for (let i = 0; i < totalSlides; i++) {
-                slides[i].style.display = "none";
+                slides[i].style.opacity = 0; // Ensure all slides are initially hidden
             }
-
             slides[slideIndex].style.display = "block";
             setTimeout(function () {
-                slides[slideIndex].style.opacity = 1; // Fade in the new slide
-            }, 10); // Small timeout to ensure the display change has taken effect
-
-        }
-
-
-        // Reinicia o intervalo quando o usuário muda o slide manualmente
-        function reiniciarIntervalo() {
-            clearInterval(slideInterval);
-            slideInterval = setInterval(nextSlide, 3000);
-        }
-
-        // Adiciona o reiniciarIntervalo às funções de navegação
-        document.querySelector('.prev').addEventListener('click', reiniciarIntervalo);
-        document.querySelector('.next').addEventListener('click', reiniciarIntervalo);
-
+                slides[slideIndex].style.opacity = 1;
+            }, 10); // Show the first slide
+        
+            function nextSlide(n) {
+                slides[slideIndex].style.opacity = 0;
+                setTimeout(function () {
+                    slides[slideIndex].style.display = "none";
+                    slideIndex = (slideIndex + n + totalSlides) % totalSlides;
+                    slides[slideIndex].style.display = "block";
+                    setTimeout(function () {
+                        slides[slideIndex].style.opacity = 1;
+                    }, 10);
+                }, 600); // Delay for fade change
+            }
+        
+            let slideInterval = setInterval(function () { nextSlide(1) }, 3000); // Change slide every 3000ms
+        
+            // Event listeners for manual slide change
+            document.querySelector('.prev').addEventListener('click', function () {
+                nextSlide(-1);
+            });
+            document.querySelector('.next').addEventListener('click', function () {
+                nextSlide(1);
+            });
+        });
     </script>
 
 </body>
