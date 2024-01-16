@@ -2,128 +2,137 @@
 
 <!DOCTYPE html>
 <html lang="pt-br">
-
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Banner Rotativo</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
-        .carousel {
-            position: relative;
-            max-width: 100%;
-            margin: auto;
-            overflow: hidden;
-        }
+      .carousel {
+        position: relative;
+        max-width: 100%;
+        margin: auto;
+        overflow: hidden;
+      }
 
-        .slide {
-            display: none;
-            width: 100%;
-            opacity: 0;
-            /* Initialize opacity to 0 */
-            transition: opacity 1s ease-in-out;
-            /* Fade effect */
-        }
+      .slide {
+        display: none;
+        width: 100%;
+        opacity: 0;
+        /* Initialize opacity to 0 */
+        transition: opacity 1s ease-in-out;
+        /* Fade effect */
+      }
 
-        .slide img {
-            width: 100%;
-            display: block;
-        }
+      .slide img {
+        width: 100%;
+        display: block;
+      }
 
-        .prev,
-        .next {
-            cursor: pointer;
-            position: absolute;
-            top: 50%;
-            width: auto;
-            margin-top: -22px;
-            padding: 16px;
-            color: white;
-            font-weight: bold;
-            font-size: 18px;
-            transition: 0.6s ease;
-            border-radius: 0 3px 3px 0;
-            -webkit-user-select: none;
-            /* Safari */
-            user-select: none;
-        }
+      .prev,
+      .next {
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        width: auto;
+        margin-top: -22px;
+        padding: 16px;
+        color: white;
+        font-weight: bold;
+        font-size: 18px;
+        transition: 0.6s ease;
+        border-radius: 0 3px 3px 0;
+        -webkit-user-select: none;
+        /* Safari */
+        user-select: none;
+      }
 
-        .prev {
-            left: 0;
-            border-radius: 3px 0 0 3px;
-        }
+      .prev {
+        left: 0;
+        border-radius: 3px 0 0 3px;
+      }
 
-        .next {
-            right: 0;
-            border-radius: 0 3px 3px 0;
-        }
+      .next {
+        right: 0;
+        border-radius: 0 3px 3px 0;
+      }
 
-        .prev:hover,
-        .next:hover {
-            background-color: rgba(0, 0, 0, 0.8);
-        }
+      .prev:hover,
+      .next:hover {
+        background-color: rgba(0, 0, 0, 0.8);
+      }
     </style>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <div class="carousel">
-        <div class="slide">
-            <img src="https://www.eliteaco.com.br/wp-content/uploads/2023/09/2023.09.08_banner_cupomSurpresa_1200x488.webp"
-                alt="Cupom Surpresa">
-        </div>
-        <div class="slide"><img
-                src="https://www.eliteaco.com.br/wp-content/uploads/2023/09/23.01.2023_banner_diversos_1200x488.webp"
-                alt="Diversos"></div>
-        <div class="slide"><img src="https://www.eliteaco.com.br/wp-content/uploads/2023/09/banner_ia.webp"
-                alt="Inteligência Artificial"></div>
-        <div class="slide"><img
-                src="https://www.eliteaco.com.br/wp-content/uploads/2023/09/banner_institucional_1200x488_07-2022.webp"
-                alt="Institucional"></div>
-        <!-- Adicione mais slides conforme necessário -->
-        <a class="prev" onclick="mudarSlide(-1)">&#10094;</a>
-        <a class="next" onclick="mudarSlide(1)">&#10095;</a>
+      <div class="slide">
+        <img
+          src="https://www.eliteaco.com.br/wp-content/uploads/2023/09/2023.09.08_banner_cupomSurpresa_1200x488.webp"
+          alt="Cupom Surpresa"
+        />
+      </div>
+      <div class="slide">
+        <img
+          src="https://www.eliteaco.com.br/wp-content/uploads/2023/09/23.01.2023_banner_diversos_1200x488.webp"
+          alt="Diversos"
+        />
+      </div>
+      <div class="slide">
+        <img
+          src="https://www.eliteaco.com.br/wp-content/uploads/2023/09/banner_ia.webp"
+          alt="Inteligência Artificial"
+        />
+      </div>
+      <div class="slide">
+        <img
+          src="https://www.eliteaco.com.br/wp-content/uploads/2023/09/banner_institucional_1200x488_07-2022.webp"
+          alt="Institucional"
+        />
+      </div>
+      <!-- Adicione mais slides conforme necessário -->
+      <a class="prev" onclick="mudarSlide(-1)">&#10094;</a>
+      <a class="next" onclick="mudarSlide(1)">&#10095;</a>
     </div>
 
-
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            let slideIndex = 0;
-            let slides = document.getElementsByClassName("slide");
-            let totalSlides = slides.length;
+      document.addEventListener("DOMContentLoaded", function () {
+        let slideIndex = 0;
+        let slides = document.getElementsByClassName("slide");
+        let totalSlides = slides.length;
 
-            // Initialize slides: hide all except the first one
-            for (let i = 0; i < totalSlides; i++) {
-                slides[i].style.opacity = 0; // Ensure all slides are initially hidden
-            }
+        // Initialize slides: hide all except the first one
+        for (let i = 0; i < totalSlides; i++) {
+          slides[i].style.opacity = 0; // Ensure all slides are initially hidden
+        }
+        slides[slideIndex].style.display = "block";
+        setTimeout(function () {
+          slides[slideIndex].style.opacity = 1;
+        }, 10); // Show the first slide
+
+        function nextSlide(n) {
+          slides[slideIndex].style.opacity = 0;
+          setTimeout(function () {
+            slides[slideIndex].style.display = "none";
+            slideIndex = (slideIndex + n + totalSlides) % totalSlides;
             slides[slideIndex].style.display = "block";
             setTimeout(function () {
-                slides[slideIndex].style.opacity = 1;
-            }, 10); // Show the first slide
+              slides[slideIndex].style.opacity = 1;
+            }, 10);
+          }, 600); // Delay for fade change
+        }
 
-            function nextSlide(n) {
-                slides[slideIndex].style.opacity = 0;
-                setTimeout(function () {
-                    slides[slideIndex].style.display = "none";
-                    slideIndex = (slideIndex + n + totalSlides) % totalSlides;
-                    slides[slideIndex].style.display = "block";
-                    setTimeout(function () {
-                        slides[slideIndex].style.opacity = 1;
-                    }, 10);
-                }, 600); // Delay for fade change
-            }
+        let slideInterval = setInterval(function () {
+          nextSlide(1);
+        }, 3000); // Change slide every 3000ms
 
-            let slideInterval = setInterval(function () { nextSlide(1) }, 3000); // Change slide every 3000ms
-
-            // Event listeners for manual slide change
-            document.querySelector('.prev').addEventListener('click', function () {
-                nextSlide(-1);
-            });
-            document.querySelector('.next').addEventListener('click', function () {
-                nextSlide(1);
-            });
+        // Event listeners for manual slide change
+        document.querySelector(".prev").addEventListener("click", function () {
+          nextSlide(-1);
         });
+        document.querySelector(".next").addEventListener("click", function () {
+          nextSlide(1);
+        });
+      });
     </script>
-
-</body>
-
+  </body>
 </html>
